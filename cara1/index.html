@@ -5,10 +5,12 @@
   </head>
   <body>
     <script>    
-let mic=new p5.AudioIn();// guarda a la variable mic una entrada de audio p5.js
+let mic;
+      
       
       function setup() {
   createCanvas(windowWidth,windowHeight);
+        mic=new p5.AudioIn();// guarda a la variable mic una entrada de audio p5.js
         mic.start();// activa el micròfon
   
 }
