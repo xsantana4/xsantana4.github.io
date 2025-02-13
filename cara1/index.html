@@ -1,30 +1,30 @@
+
 <html>
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.2/p5.min.js" integrity="sha512-1YMgn4j8cIL91s14ByDGmHtBU6+F8bWOMcF47S0cRO3QNm8SKPNexy4s3OCim9fABUtO++nJMtcpWbINWjMSzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.2/addons/p5.sound.min.js" integrity="sha512-WzkwpdWEMAY/W8WvP9KS2/VI6zkgejR4/KTxTl4qHx0utqeyVE0JY+S1DlMuxDChC7x0oXtk/ESji6a0lP/Tdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.2/addons/p5.sound.min.js" integrity="sha512-WzkwpdWEMAY/W8WvP9KS2/VI6zkgejR4/KTxTl4qHx0utqeyVE0JY+S1DlMuxDChC7x0oXtk/ESji6a0lP/Tdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <body>
-    <script>    
+    <script>
 let mic;
-      
-      
+     
+    
       function setup() {
-  createCanvas(windowWidth,windowHeight);
-        mic=new p5.AudioIn();// guarda a la variable mic una entrada de audio p5.js
+  createCanvas(windowWidth,windowHeight);
+        mic=new p5.AudioIn();// guarda a la variable mic una entrada de audio de p5.js
         mic.start();// activa el micròfon
-  
 }
 function draw() {
   let vol=mic.getLevel();
   let h=map(vol,0,1,0,400);
-  background("red");
+  background(red);
   fill(214, 220, 162);
   ellipse(windowWidth/2,windowHeight/2,300,300);
-  fill(1, 1, 1);
+  fill(1,1,1);
   ellipse(windowWidth/2-70,windowHeight/2-60,50,50);
   ellipse(windowWidth/2+70,windowHeight/2-60,50,50);
   arc(windowWidth/2,windowHeight/2+90,100,50+h,0,PI);
 }
     </script>
-</body>    
+</body>
 </html>
