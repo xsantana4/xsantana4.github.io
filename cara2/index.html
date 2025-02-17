@@ -6,7 +6,7 @@
   <body>
     <script>
 let mic;
-     
+      let temblar;
     
       function setup() {
   createCanvas(windowWidth,windowHeight);
@@ -14,15 +14,23 @@ let mic;
         mic.start();// activa el micròfon
 }
 function draw() {
+  temblar=random(10,50)
   let vol=mic.getLevel();
   let h=map(vol,0,1,0,800);
-  background(255-h, 0, 0);
-  fill(222, 215-h, 145);
-  ellipse(windowWidth/2,windowHeight/2,300,300);
-  fill(0, 0, 0+h);
-  ellipse(windowWidth/2-70,windowHeight/2-60,50,50);
-  ellipse(windowWidth/2+70,windowHeight/2-60,50,50);
-  arc(windowWidth/2,windowHeight/2+90,100,50+h,0,PI);
+  background(255-h, 0, 0);// color de fons
+  fill(222, 215-h, 145);// color cara
+  ellipse(windowWidth/2,windowHeight/2,300+temblar,300+temblar);// cara
+  // windowWidth/2 significa que el centre de la cara coincideix amb el centre de la finestra
+  // windowHeight/2 significa el centre de la cara en alçada i coincideix amb el centre de la cara
+  // el primer que hi ha entre parentesis és diu paramètre y es la posició de X y del centre de la cara
+  // el segon paramètre és la posició Y
+  // el tercer paràmetre es l'amplada de la cara
+  // el quart és l'alçada de la cara
+  // temblar esta sumat a la amplada i alçada de la cara i canviara aleatoriament entre 10-50 pixels
+  fill(0, 0, 0+h);// color ulls
+  ellipse(windowWidth/2-70,windowHeight/2-60,50,50);// ull dret
+  ellipse(windowWidth/2+70,windowHeight/2-60,50,50);// ull esquerra
+  arc(windowWidth/2,windowHeight/2+90,100,50+h,0,PI);// boca
 }
     </script>
 </body>
