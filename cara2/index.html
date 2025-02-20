@@ -17,7 +17,7 @@ function draw() {
   temblar=random(10,50)
   let vol=mic.getLevel();
   let h=map(vol,0,1,0,800);
-  background(255-h, 0, 0);// color de fons
+  background(255, 0, 0);// color de fons
   fill(222, 215-h, 145);// color cara
   ellipse(windowWidth/2,windowHeight/2,300+temblar,300+temblar);// cara
   // windowWidth/2 significa que el centre de la cara coincideix amb el centre de la finestra
