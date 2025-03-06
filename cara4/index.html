@@ -20,16 +20,17 @@ function draw() {
    t += 0.01;
         // Incrementa la variable 't' per fer que el 'noise()' canviï progressivament.
 
-        let noiseX = noise(t) * 100 - 50;
+        let noise1 = noise(t) * 100;
         // Calcula la posició X del centre de la cara.
         // width / 2: Posa el centre a la meitat de l'amplada del canvas.
         // noise(t): Funció 'noise' genera valors suaus entre 0 i 1, donant moviment orgànic.
         // * 100: Amplifica el moviment.
         // - 50: Centra el moviment al voltant de la posició original.
 
-        let noiseY = noise(t + 100) * 100 - 50;
+        let noise2 = noise(t + 100) * 100;
         // Calcula la posició Y del centre de la cara amb el mateix patró.
         // noise(t + 100): Utilitza un desplaçament (+100) perquè X i Y siguin independents.
+  let noise3= noise (t+200) *255;
 
   temblar=random(10,50);
  sinus=sin(frameCount * 0.1);//la variable sinus crea numeros entre -1 i +1
@@ -40,9 +41,9 @@ function draw() {
 //entre 0 50 
   let vol=mic.getLevel();
   let h=map(vol,0,1,0,800);
-  background(122+movsinus, 115, 34+movsinus );// color de fons
-  fill(192, 165, 227+movsinus);// color cara
-  ellipse(windowWidth/2,windowHeight/2,300+movsinus,300+movsinus);// cara
+  background(255-noise3, 170, noise3 );// color de fons
+  fill(222, 215, 145+movsinus);// color cara
+  ellipse(windowWidth/2,windowHeight/2,300+noise1,300+noise1);// cara
   // windowWidth/2 significa que el centre de la cara coincideix amb el centre de la finestra
   // windowHeight/2 significa el centre de la cara en alçada i coincideix amb el centre de la cara
   // el primer que hi ha entre parentesis és diu paramètre y es la posició de X y del centre de la cara
@@ -50,9 +51,9 @@ function draw() {
   // el tercer paràmetre es l'amplada de la cara
   // el quart és l'alçada de la cara
   // temblar esta sumat a la amplada i alçada de la cara i canviara aleatoriament entre 10-50 pixels
- fill(5, 23+h*2, 14);// color ulls
-  ellipse(windowWidth/2-70,windowHeight/2-60,50-h,50-h+movsinus*2);// ull dret
-  ellipse(windowWidth/2+70,windowHeight/2-60-h,50,50+h+movsinus*2);// ull esquerra
+ fill(0, 0, 0+h*2);// color ulls
+  ellipse(windowWidth/2-70,windowHeight/2-60,50-h,50-h+noise2);// ull dret
+  ellipse(windowWidth/2+70,windowHeight/2-60-h,50,50+h+noise2);// ull esquerra
   arc(windowWidth/2,windowHeight/2+90,100,50+h,0,PI);// boca
 }
       console.log(h);
