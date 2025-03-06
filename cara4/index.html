@@ -43,7 +43,7 @@ function draw() {
   let h=map(vol,0,1,0,800);
   background(255-noise3, 170, noise3 );// color de fons
   fill(movsinus,movsinus,movsinus);// color cara
-  ellipse(windowWidth/2,windowHeight/2,300+noise1,300+noise1);// cara
+  ellipse(mouseX,mouseY/2,300+noise1,300+noise1);// cara
   // windowWidth/2 significa que el centre de la cara coincideix amb el centre de la finestra
   // windowHeight/2 significa el centre de la cara en alçada i coincideix amb el centre de la cara
   // el primer que hi ha entre parentesis és diu paramètre y es la posició de X y del centre de la cara
