@@ -33,16 +33,15 @@ function draw() {
   let noise3= noise (t+200) *255;
 
   temblar=random(10,50);
- sinus=sin(frameCount * 0.1);//la variable sinus crea numeros entre -1 i +1
-  //frameCount esta contant els fotogrames i fa 60 a sinus per segon
-  //això vol dir 60 numeros entre -1 i 1 ordenats per segon
+  let sinus=sin(frameCount * 0.1);
   let movsinus=map(sinus,-1,1,0,255);
-  //converteix els numeros entre -1 i +1 donaran numeros proporcionals
-//entre 0 50 
+  let cosinus=cos(frameCount * 0.1);
+  let movcosinus=map(cosinus,-1,1,0,255);
+ 
   let vol=mic.getLevel();
   let h=map(vol,0,1,0,800);
   background(255-noise3, 170, noise3 );// color de fons
-  fill(movsinus,movsinus,movsinus);// color cara
+  fill(movcosinus,movcosinus,movsinus);// color cara
   ellipse(mouseX,mouseY/2,300+noise1,300+noise1);// cara
   // windowWidth/2 significa que el centre de la cara coincideix amb el centre de la finestra
   // windowHeight/2 significa el centre de la cara en alçada i coincideix amb el centre de la cara
