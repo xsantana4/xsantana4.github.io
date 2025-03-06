@@ -8,19 +8,25 @@
     <script>
 let mic;
       let temblar;
-    
+    let sinus;//creem una variable que es diu sinus
       function setup() {
   createCanvas(windowWidth,windowHeight);
         mic=new p5.AudioIn();// guarda a la variable mic una entrada de audio de p5.js
         mic.start();// activa el micròfon
 }
 function draw() {
-  temblar=random(10,50)
+  temblar=random(10,50);
+ sinus=sin(frameCount * 0.1);//la variable sinus crea numeros entre -1 i +1
+  //frameCount esta contant els fotogrames i fa 60 a sinus per segon
+  //això vol dir 60 numeros entre -1 i 1 ordenats per segon
+  let movsinus=map(sinus,-1,1,0,255);
+  //converteix els numeros entre -1 i +1 donaran numeros proporcionals
+//entre 0 50 
   let vol=mic.getLevel();
   let h=map(vol,0,1,0,800);
-  background(78, 170, 207);// color de fons
-  fill(222, 215-h, 145);// color cara
-  ellipse(windowWidth/2,windowHeight/2,300+temblar,300+temblar);// cara
+ background(78, 170+movsinus, 207+movsinus);// color de fons
+  fill(222-movsinus, 215, 145);// color cara
+  ellipse(windowWidth/2,windowHeight/2,300+movsinus,300+movsinus);// cara
   // windowWidth/2 significa que el centre de la cara coincideix amb el centre de la finestra
   // windowHeight/2 significa el centre de la cara en alçada i coincideix amb el centre de la cara
   // el primer que hi ha entre parentesis és diu paramètre y es la posició de X y del centre de la cara
@@ -28,9 +34,9 @@ function draw() {
   // el tercer paràmetre es l'amplada de la cara
   // el quart és l'alçada de la cara
   // temblar esta sumat a la amplada i alçada de la cara i canviara aleatoriament entre 10-50 pixels
-  fill(0, 0, 0+h*2);// color ulls
-  ellipse(windowWidth/2-70,windowHeight/2-60,50-h,50-h);// ull dret
-  ellipse(windowWidth/2+70,windowHeight/2-60-h,50,50+h);// ull esquerra
+ fill(5, 23+h*2, 14);// color ulls
+  ellipse(windowWidth/2-70,windowHeight/2-60,50-h,50-h+movsinus*2);// ull dret
+  ellipse(windowWidth/2+70,windowHeight/2-60-h,50,50+h+movsinus*2);// ull esquerra
   arc(windowWidth/2,windowHeight/2+90,100,50+h,0,PI);// boca
 }
       console.log(h);
