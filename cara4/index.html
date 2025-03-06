@@ -52,8 +52,8 @@ function draw() {
   // el quart és l'alçada de la cara
   // temblar esta sumat a la amplada i alçada de la cara i canviara aleatoriament entre 10-50 pixels
  fill(0, 0, 0+h*2);// color ulls
-  ellipse(windowWidth/2-70,windowHeight/2-60,50-h,50-h+noise2);// ull dret
-  ellipse(windowWidth/2+70,windowHeight/2-60-h,50,50+h+noise2);// ull esquerra
+  ellipse(mouxeX-70,mouseY-60,50-h,50-h+noise2);// ull dret
+  ellipse(mouseX+70,mouseY-60-h,50,50+h+noise2);// ull esquerra
   arc(windowWidth/2,windowHeight/2+90,100,50+h,0,PI);// boca
 }
       console.log(h);
