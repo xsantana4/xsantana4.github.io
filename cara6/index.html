@@ -5,8 +5,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.2/addons/p5.sound.min.js" integrity="sha512-WzkwpdWEMAY/W8WvP9KS2/VI6zkgejR4/KTxTl4qHx0utqeyVE0JY+S1DlMuxDChC7x0oXtk/ESji6a0lP/Tdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <body>
+  <!-- Botó per canviar el color de fons (fa ús de la funció random()) -->
+  <button onclick="changeBackground();">Canvia Fons</button>
     <script>
  let t = 0;
+      let bgColor;
       // Declara i inicialitza la variable 't', que servirà per crear un moviment suau amb 'noise()'.
       let mic;
       let smile=false;// hem creat una variable de tipus booleana, que pot tenir dos valors. True o false, que vol dir veritat o fals. He posat false perque no s'executi al começar
@@ -65,6 +68,13 @@ function draw() {
   arc(mouseX/2,mouseY/2+90,100,50+h,PI,0);// boca  
     }
 }
+      /* Funció per canviar el color de fons:
+       Utilitza random() per generar components RGB aleatoris dins d'un interval.
+       Aquesta funció es crida en prémer el botó "Canvia Fons". */
+    function changeBackground() {
+      bgColor = color(random(100, 255), random(100, 255), random(100, 255));
+    }
+
        function keyPressed(){
          // aquesta funcio fa que quan premo la "S" o "s". La funció smile canvia perque smile= no smile. If significa si es compleix
          //|| significa o. ! significa no i pertant el smile que era false. Es transformara en true
