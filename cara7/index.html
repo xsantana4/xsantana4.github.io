@@ -1,0 +1,103 @@
+
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.2/p5.min.js" integrity="sha512-1YMgn4j8cIL91s14ByDGmHtBU6+F8bWOMcF47S0cRO3QNm8SKPNexy4s3OCim9fABUtO++nJMtcpWbINWjMSzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.2/addons/p5.sound.min.js" integrity="sha512-WzkwpdWEMAY/W8WvP9KS2/VI6zkgejR4/KTxTl4qHx0utqeyVE0JY+S1DlMuxDChC7x0oXtk/ESji6a0lP/Tdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    <button onclick="changeBackground();">Canvia Fons</button>
+
+    <script>
+let t = 0;
+      // Declara i inicialitza la variable 't', que servirà per crear un moviment suau amb 'noise()'.
+       let bgColor ;        // Variable per emmagatzemar el color de fons actual.
+let h ;
+      let mic;
+      let smile=false;
+      //em creat una variable de tipus booleana,que pot tenir dos valors
+      //true o false, que vol dir veritat o fals
+      //he posat false perquè no s'executi al començar quan s'obre la pàgina
+      let temblar;
+    let sinus;//creem una variable que es diu sinus
+      function setup() {
+  createCanvas(windowWidth,windowHeight);
+        mic=new p5.AudioIn();// guarda a la variable mic una entrada de audio de p5.js
+        mic.start();// activa el micròfon
+         bgColor = color(200, 220, 255); // Color de fons inicial (un blau clar).
+}
+function draw() {
+   t += 0.01;
+        // Incrementa la variable 't' per fer que el 'noise()' canviï progressivament.
+
+        let noise1 = noise(t) * 25;
+        // Calcula la posició X del centre de la cara.
+        // width / 2: Posa el centre a la meitat de l'amplada del canvas.
+        // noise(t): Funció 'noise' genera valors suaus entre 0 i 1, donant moviment orgànic.
+        // * 100: Amplifica el moviment.
+        // - 50: Centra el moviment al voltant de la posició original.
+
+        let noise2 = noise(t + 100) * 20;
+        // Calcula la posició Y del centre de la cara amb el mateix patró.
+        // noise(t + 100): Utilitza un desplaçament (+100) perquè X i Y siguin independents.
+  let noise3 = noise(t + 200) * 255;
+
+  temblar=random(10,50);
+ 
+  //frameCount esta contant els fotogrames i fa 60 a sinus per segon
+  //això vol dir 60 numeros entre -1 i 1 ordenats per segon
+  let sinus=sin(frameCount * 0.1);//la variable sinus crea numeros entre -1 i +1
+  let movsinus=map(sinus,-1,1,0,255);
+let cosinus=cos(frameCount * 0.1);//la variable sinus crea numeros entre -1 i +1
+  let movcosinus=map(cosinus,-1,1,0,255);
+  //converteix els numeros entre -1 i +1 donaran numeros proporcionals
+//entre 0 50 
+  let vol=mic.getLevel();
+  let h=map(vol,0,1,0,800);
+  background(bgColor);// color de fons 
+  fill(movcosinus/2, movcosinus, movsinus);// color cara
+  ellipse(mouseX,mouseY,300+noise1,300+noise1);// cara
+  // windowWidth/2 significa que el centre de la cara coincideix amb el centre de la finestra
+  // windowHeight/2 significa el centre de la cara en alçada i coincideix amb el centre de la cara
+  // el primer que hi ha entre parentesis és diu paramètre y es la posició de X y del centre de la cara
+  // el segon paramètre és la posició Y
+  // el tercer paràmetre es l'amplada de la cara
+  // el quart és l'alçada de la cara
+  // temblar esta sumat a la amplada i alçada de la cara i canviara aleatoriament entre 10-50 pixels
+ fill(5+noise3, 23+h*2, noise3);// color ulls
+  ellipse(mouseX-70,mouseY-60,50-h,50-h+noise2);// ull dret
+  ellipse(mouseX+70,mouseY-60-h,50,50+h+noise2);// ull esquerra
+ if (smile){
+  arc(mouseX,mouseY+90,100,50+h,0,PI);// boca cap avall
+   }else{
+   arc(mouseX,mouseY+90,100,50+h,0,PI);// boca cap avall  
+ noStroke();
+   fill(254, 254, 254 );//color blanc de les alaes
+  ellipse(60,40,15,15);//ala  balnca de la dreta
+   ellipse(40,60,15,15);//ala blanca de l'esquerra
+    fill(200, 12, 30 );//color negre
+   ellipse(noiseX,noiseY,30,20);//cos del mosquit negre de forma odona 20 pixelsi 20 pixels alt i situat a 50 pixsels de la cantonada superior esquerra
+   }
+   }
+
+      function keyPressed(){
+        //aquesta funció fa que quan pemo la S o s 
+        //la funció smile canvia perquè smile=no smile 
+        //if significa si és compleix
+        //||significa o
+        //! significa no  i pr tant el smile que era false 
+        // es transformarà en true
+      if(key==='S'||key==='s')
+        {
+          smile=!smile;}
+         }
+      /* Funció per canviar el color de fons:
+       Utilitza random() per generar components RGB aleatoris dins d'un interval.
+       Aquesta funció es crida en prémer el botó "Canvia Fons". */
+    function changeBackground() {
+      bgColor = color(random(100, 255), random(100, 255), random(100, 255));
+    }
+
+    
+    </script>
+</body>
+</html>
