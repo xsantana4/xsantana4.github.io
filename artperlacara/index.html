@@ -1,0 +1,130 @@
+<DOCTYPE html>
+<!--Indica que el document es HTML5-->
+<html>
+<head>
+<!--La secció head conte metatades i enllaços a fixtxers externs-->
+<meta charset="UTF-8">
+<!--Defineix la codificació de caracters a UTF-8, que suporta accents i simbols especials-->
+
+<title>Art Geomètric amb Mini Cara i Text Gran</title>
+<!--Defineix el titol de la pagina que apareixera a la pestanya del navegador-->
+
+  <!--Llibreries necessaries: s'inclouen des de servidors externs-->
+  <script src="https://cdjns.cloudfare.com/ajax/libs/p5.js/1.11.3/p5.js"></script>
+  <!--Aquesta es la biblioteca ml5.js, que ens permet utilitzar models d'intel·ligencia artificial com la deteccio facial-->
+  <style>
+    /*Inici del codi CSS per donar estil a la pagina*/
+    body{
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      /* Fons de color gris clar*/
+    display: flex;
+      flex-direction: column;
+      aling-items: center;
+      /*La pàgina esta centrada i es distribueixen els elements en columna*/
+    }
+    /*Estils per a la pantalla de carrega que es mostra abans que es carreguin els models*/
+    #loadin-screen {
+      position: fixed;
+      /* La pantalla de carrega fixa en tot moment a la finestra del navegador */
+    top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.9);
+      /* Fons blanc amb lleugera transparència*/
+    display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* Centra el contingut de la pantalla (loader i text) */
+    font-family: Arial, sans-serif;
+      font-size: 18px;
+      color: #333;
+      /*Text en gris fosc per a bona llegibilitat*/
+    z-index: 10;
+      /* Es col·loca per sobre tot el contigut (amb un index z alt)*/
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 6px solid #3498db;
+      /* Marge de 6 pixels de grosor amb color blau (part de la vora) */
+    border-top: 6px solid transparent;
+      /*La part superior es transparent per l'efecte giratori*/
+    border-radius:50%;
+      /* Fa el loader circular*/
+    animation: spin 1s linear infinite;
+      /* Aplica una animació que fa girar l'element indefinidament*/
+    margin-bottom: 10px;
+    }
+
+    /*Declaració de la keyframe de l'animació per girar l'element loader */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    /*Fi de l'estil CSS*/
+    </style>
+</head>
+<body>
+  <!--Cos del document: aqui es col·loca el contingut visible a la pagina-->
+
+  <!--Pantalla de carrega: s'exhibeixen mentre es carreguen els models de detecció facial-->
+  <div id="loading-screen">
+    <div class="loader"></div>
+    <!--Element visual que gira per mostrar que s'esta carregant-->
+    <p>Carregant models, si us plau, espera...</p>
+    <!--Missatge per informar a l'usuari que s'esta carregant el model-->
+  </div>
+
+  <script>
+    /*Inici del codi JavaScript*/
+
+    //Declarem variables globals utilitzades en el codi
+    let faceapi;
+    //Aquesta variable emmagatzemarà el model de detecció facial de ml5.js
+
+    let detections=[];
+    // Array on es guardaran els resultats (deteccions) que ens proporciona el model facial
+
+    let video;
+    //variable que guardara la captura de video de la càmera
+
+    let modelsMostrats= false;
+    //Variable booleana per controlar si ja s'ha amagat la pantalla de càrrega
+
+    //Variables per a la mida de la mini imatge de la cara que es mostrarà
+    const miniWidth = 120;
+    const miniHeight = 120;
+
+    //Funcio setup p5.js, s'executa una vegada al principi
+    fuction setup() {
+    //Creem un canvas (llindar per dibuixos) de 600x600 pixels
+    //createCanvas(windowWidht,windowHeight);
+
+    createCanvas(windowWidth,windowHeight);//Canvi aqui
+
+    //Iniciem la captura de video des de la camera de l'usuari
+    video = createCapture(VIDEO);
+      video.size(480,480);
+      //Es defineix la mida del video
+    video.hide();
+      //Amaguem el video perque nomes s'utilizi per processar la imatge, no per mostrar-lo directament
+
+    //Opcions per a la detecció facial (configuració del model)
+    const faceOptions= {
+      withhLandmarks: true,//Detecta els punts clau de la cara(ulls,nas,boca,etc.)
+      withExpressions: true,//Detecta les expressions facials(felicitat,tristesa,etc.)
+      withDescriptors: false,//No sol·licita descriptors facials (informació per reconeixer cares)
+      minConfidence: 0,5//Nivell minim de certesa  per considerar una detecció valida
+    };
+
+    //Inicialitza el model de detecció facial amb el video i les opcions definides
+    faceapi = ml5.faceApi(video,faceOptions,faceReady);
+      //Quan el model estigui preparat, es cridara la funcio faceReady
+    }
+
+    //Funcio que s'executa
