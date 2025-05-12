@@ -200,16 +200,17 @@ vertex(70, 64.1875);
 
         case 'surprised':
           stroke(0,150,255,150); // blau clar
-          beginShape();
-          for (let i = 0; i < 20; i++) {
-            let angle = random(TWO_PI);
-            let r = 50 + 100 * intensity;
-            let x = VIRTUAL_W/2 + r * cos(angle);
-            let y = VIRTUAL_H/2 + r * sin(angle);
-            vertex(x, y);
-          }
-          endShape(CLOSE);
-          break;
+          beginShape(); // ull dret més obert
+          vertex(88, 65.1875);
+          vertex(91, 65.1875);
+vertex(93, 65.1875);
+vertex(95, 65.1875);
+vertex(96, 66.1875);
+vertex(94, 67.1875);
+vertex(92, 67.1875);
+vertex(88, 67.1875);
+endShape(CLOSE);
+break;
 
         case 'disgusted':
           stroke(0,150,0,150); // verd
