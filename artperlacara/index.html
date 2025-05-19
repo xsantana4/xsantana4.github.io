@@ -138,6 +138,8 @@
       textSize(32);
       textAlign(CENTER, TOP);
       text("Expressió: " + dominant, width / 2, 10);
+      textSize(24);
+      text("Intensitat: " + Math.round(intensity * 100)+ " % ", width / 2, 40);
 
       // Mostra el vídeo si hi ha detecció
       if (detections.length > 0) {
