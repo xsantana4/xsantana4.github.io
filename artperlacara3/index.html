@@ -366,8 +366,8 @@
             // Defineix que el contorn sigui de color groc (RGB: 255, 204, 0)
             fill(255, 230, 100, 150 * smoothIntensity);
             // Omple la forma amb un groc clar. El valor 150 * smoothIntensity controla la transparència.
-            beginShape();
-            vertex(72, 63.1875);
+beginShape(); // ull esquerra
+vertex(72, 63.1875);
 vertex(75, 63.1875);
 vertex(76, 64.1875);
 vertex(77, 65.1875);
@@ -375,6 +375,22 @@ vertex(77, 67.1875);
 vertex(73, 68.1875);
 vertex(69, 68.1875);
 vertex(70, 64.1875);
+endShape(CLOSE);
+beginShape(); // ull dreta
+vertex(88, 68.1875);
+vertex(87, 66.1875);
+vertex(87, 63.1875);
+vertex(89, 62.1875);
+vertex(91, 62.1875);
+vertex(93, 62.1875);
+vertex(96, 63.1875);
+vertex(96, 64.1875);
+vertex(96, 66.1875);
+vertex(96, 68.1875);
+vertex(93, 68.1875);
+vertex(89, 68.1875);
+endShape(CLOSE);
+
             // Inicia la definició d'una forma complexa (múltiples punts)
             for (let i = 0; i < 10; i++) {
               // Bucle per generar 10 punts (vertex) al voltant d’un cercle
